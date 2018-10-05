@@ -138,7 +138,7 @@ namespace JurisUtilityBase
                 DataSet rectest1 = _jurisUtility.RecordsetFromSQL(SQL);
                 if (rectest1.Tables[0].Rows.Count > 0)  //there ARE unrecorded recs
                 {
-                    DialogResult inProgress = MessageBox.Show("There is a bank reconciliation in progress for Bank " + BnkCode + ". That reconciliation  will be deleted." + "\r\n" + "The last recorded reconciliation (statement date: " + textBoxStateDate + ") will be set to 'unrecorded'.  Do you wish to continue?", "Reconciliation in progress", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    DialogResult inProgress = MessageBox.Show("There is a bank reconciliation in progress for Bank " + BnkCode + ". That reconciliation  will be deleted." + "\r\n" + "The last recorded reconciliation (statement date: " + textBoxStateDate.Text + ") will be set to 'unrecorded'.  Do you wish to continue?", "Reconciliation in progress", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (inProgress == System.Windows.Forms.DialogResult.Yes)
                     {
 
@@ -150,6 +150,9 @@ namespace JurisUtilityBase
                         /////////set last rec to unrecorded after unrecorded rec was removed
                         setBankRecToUnrecorded();
                         updateBankAccount();
+                        UpdateStatus("Bank Rec undone.", 1, 1);
+
+                        MessageBox.Show("The process is complete", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.None);
                     }
                     else
                         MessageBox.Show("No changes were made");
@@ -159,12 +162,12 @@ namespace JurisUtilityBase
                     setBankRecToUnrecorded();
                     updateBankAccount();
 
+                    UpdateStatus("Bank Rec undone.", 1, 1);
 
+                    MessageBox.Show("The process is complete", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.None);
                 }
 
-                UpdateStatus("Bank Rec undone.", 1, 1);
 
-                MessageBox.Show("The process is complete", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.None);
 
 
 
