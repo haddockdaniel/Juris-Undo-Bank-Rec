@@ -52,6 +52,15 @@ namespace JurisUtilityBase
                 {
                     Microsoft.Office.Interop.Excel.Range myRange = (Microsoft.Office.Interop.Excel.Range)xlWorkSheet.Cells[StartRow, StartCol + j];
                     myRange.Value2 = dataGridView1.Columns[j].HeaderText;
+                    if (dataGridView1.Columns[j].HeaderText.ToString().ToLower().Contains("date"))
+                    {
+                        for (int a = 1; a < dataGridView1.Rows.Count + 1; a++)
+                        {
+                            myRange = xlWorkSheet.Cells[StartRow + a, StartCol + j];
+                            myRange.EntireColumn.NumberFormat = "MM/DD/YYYY";
+                        }
+
+                    }
                 }
 
                 StartRow++;
