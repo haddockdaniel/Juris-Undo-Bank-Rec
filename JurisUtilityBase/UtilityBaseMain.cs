@@ -167,12 +167,6 @@ namespace JurisUtilityBase
                     MessageBox.Show("The process is complete", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.None);
                 }
 
-
-
-
-
-
-
             }
             validRec = false;
         }
@@ -182,7 +176,7 @@ namespace JurisUtilityBase
             string SQL = "UPDATE BankReconHistory SET BRHRecorded = 'N', BRHRecordedDate = CONVERT(DATETIME, '12/31/1899 00:00:00', 101) " +
                 "WHERE (BRHRecorded = 'Y') AND (BRHBank = '" + BnkCode + "') AND (BRHRecordedDate = '" + textBoxRecDate.Text + "') AND " +
                 "(BRHStmtDate = '" + textBoxStateDate.Text + "')";
-            _jurisUtility.ExecuteNonQueryCommand(0, SQL);
+            MessageBox.Show( _jurisUtility.ExecuteNonQueryCommand(0, SQL).ToString());
             SQL = "UPDATE CheckRegister SET CkRegCleared = 'P' WHERE (CkRegBank = '" + BnkCode + "') AND (CkRegCleared = 'Y') AND (CkRegReconDate = '" 
                 + textBoxStateDate.Text + "')";
             _jurisUtility.ExecuteNonQueryCommand(0, SQL);
@@ -195,12 +189,12 @@ namespace JurisUtilityBase
             if (totalRecRows == 1)
             {
                 string SQL = "UPDATE BankAccount SET BnkLastReconDate = CONVERT(DATETIME, '12/31/1899 00:00:00', 101), BnkLastReconBal = 0 WHERE BnkCode = '" + BnkCode + "'";
-                _jurisUtility.ExecuteNonQueryCommand(0, SQL);
+                MessageBox.Show(_jurisUtility.ExecuteNonQueryCommand(0, SQL).ToString());
             }
             else
             {
                 string SQL = "UPDATE BankAccount SET BnkLastReconDate = '" + textBoxRecDate.Text + "', BnkLastReconBal = " + lastReconBal + " WHERE BnkCode = '" + BnkCode + "'";
-                _jurisUtility.ExecuteNonQueryCommand(0, SQL);
+                MessageBox.Show(_jurisUtility.ExecuteNonQueryCommand(0, SQL).ToString());
             }
 
 
